@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  articleservice:
+    build: .
+    command: >
+      gunicorn -b 0.0.0.0:8000
+        --access-logfile -
+        --reload
+        "app.articleservice:app"
+    environment:
+      PYTHONUNBUFFERED: 'true'
+    volumes:
+      - '.:/articleservice'
+    ports:
+      - '8000:8000'
